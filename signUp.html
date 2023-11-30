@@ -1,0 +1,288 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="profile.css"> -->
+        <!-- <link rel="stylesheet" href="stykes_chat.css"> -->
+        <link rel="stylesheet" href="styles.css">
+        <!-- <link rel="stylesheet" href="style.scss"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <title>Wishlist Wanderers</title>
+
+    </head>
+    <body>
+        <div class="topnav">
+            <h3>Wishlist Wanderers</h3>
+            <!-- <button id = "signUpbutton"class = "signup" onclick="toggleSignUp()">SIGN UP</button> -->
+            <!-- <button id = "signUpbutton"class = "signup" onclick="toggleSignUp()">SIGN UP</button> -->
+            <button id = "logInbutton" class = "signup" onclick="toggleSignUp()" >LOGIN</button>
+        </div>
+
+        <main>
+            
+
+            <form id="userDescriptionForm" >
+                <div class="container">
+                    <div class="input-grou">
+                        <input type="text" placeholder="First Name" name="fName" id="fName" required>
+                        <input type="text" placeholder="Last Name" name="lName" id="lName" required>
+                    </div>
+
+                    <div class="input-grou">
+                        <input type="text" placeholder="State" name="state" id="state" required>
+                        <input type="text" placeholder="City" name="city" id="city" required>
+                    </div>
+
+                    <input type="text" placeholder="Country" name="country" id="country" required>
+
+                    <input type="text" placeholder="Enter your emailid" name="emailId" id="emailId" required>
+
+                    <input type="text" placeholder="Enter Zipcode" name="zipCode" id="zipCode" required>
+                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+                   
+                </div>
+                
+                
+                <h2 style="margin-top: 20px;">About Me</h2>
+                
+                <textarea name="aboutMe" placeholder="Write something about you..."  id="aboutMe"></textarea><br><br>
+                <h2>Hobbies</h2>
+                <div>
+                    
+                    <div id="customHobby">
+                        <label>Add hobbies that you want to do:</label>
+                        <input type="text" id="customHobbyInput">
+                        <button type="button" onclick="addCustomHobby()" class="lbuton">Add</button>
+                    </div>
+
+                    <h3>Selected Hobbies:</h3>
+                    <div id="selectedHobbies"></div>
+
+                    <div id="customHobby">
+                        <label>Add hobbies already done:</label>
+                        <input type="text" id="doneHobbyInput">
+                        <button type="button" onclick="addDoneHobby()" class="lbuton">Add</button>
+                    </div>
+                </div>
+                
+                
+
+                <h3>Completed Hobbies:</h3>
+                <div id="selectedDoneHobbies"></div>
+
+                <br><br>
+                <input type="submit" value="SUBMIT" class="lbuton">
+            </form>
+        </main>
+        <script>
+            // JavaScript for opening the chat interface for a selected user
+
+            function openChat(username) {
+                // Hide the user selection interface
+                const userSelection = document.querySelector('.user');
+                // userSelection.style.display = 'none';
+
+                // Show the chat interface
+                const chatContainer = document.getElementById('chat-container1');
+                chatContainer.style.display = 'block';
+
+                // Set the chat title to the selected username
+                const chatTitle = document.getElementById('chat-title');
+                chatTitle.textContent = 'Chat with ' + username;
+
+                // You can implement logic to load chat history for the selected user here
+                // For now, let's assume the selected user is User1
+                loadChatHistory('Emily Smith');
+            }
+
+            // Function to load chat history for a selected user (dummy data for demonstration)
+            function loadChatHistory(selectedUser) {
+                const chatMessages = document.getElementById('chat-messages');
+                chatMessages.innerHTML = '';
+
+                // Dummy data for chat history
+                const messages = [
+                    { user: 'Emily Smith', message: 'Hello!', timestamp: '10:00 AM' },
+                    { user: 'Me', message: 'How are you?', timestamp: '10:01 AM' },
+                    { user: 'Emily Smith', message: 'Hi! I\'m good, thanks.', timestamp: '10:05 AM' },
+                    { user: 'Me', message: 'That\'s great!', timestamp: '10:07 AM' },
+                    { user: 'Emily Smith', message: 'Are you attending the Coldplay concert by any chance?', timestamp: '10:08 AM' },
+                ];
+
+                // Display chat history
+                messages.forEach((msg) => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = msg.user === selectedUser ? 'message self' : 'message';
+                    messageDiv.innerHTML = `<span class="message-sender">${msg.user}</span><span class="message-text">${msg.message}</span><span class="message-timestamp">${msg.timestamp}</span>`;
+                    chatMessages.appendChild(messageDiv);
+                });
+            }
+
+        </script>
+        <div class="footer-dark" id="footer">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Services</h3>
+                            <ul>
+                                <li><a href="#">Web design</a></li>
+                                <li><a href="#">Development</a></li>
+                                <li><a href="#">Hosting</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>About</h3>
+                            <ul>
+                                <li><a href="#">Company</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Careers</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 item text">
+                            <h3>Company Name</h3>
+                            <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                        </div>
+                        <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                    </div>
+                    <p class="copyright">Company Name © 2018</p>
+                </div>
+            </footer>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+        
+        <script>
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const signupbutton = document.getElementById('signUpbutton');
+            const loginbutton = document.getElementById('logInbutton');
+            const addressForm = document.getElementById('addressForm');
+            // const birthdateForm = document.getElementById('birthdateForm');
+            // const profilePictureForm = document.getElementById('profilePictureForm');
+            const userDescriptionForm = document.getElementById('userDescriptionForm');
+
+
+            function toggleSignUp() {
+            
+                window.location.href='login.html';
+
+            }
+
+            const selectedHobbies = [];
+            const selectedDoneHobbies =[];
+
+            function addHobby(hobby) {
+                if (!selectedHobbies.includes(hobby)) {
+                    selectedHobbies.push(hobby);
+                    updateSelectedHobbies();
+                }
+            }
+
+            function addCustomHobby() {
+                const customHobbyInput = document.getElementById('customHobbyInput');
+                const customHobby = customHobbyInput.value.trim();
+
+                if (customHobby !== '' && !selectedHobbies.includes(customHobby)) {
+                    selectedHobbies.push(customHobby);
+                    customHobbyInput.value = '';
+                    updateSelectedHobbies();
+                }
+            }
+
+            
+
+            function updateSelectedHobbies() {
+                const selectedHobbiesDiv = document.getElementById('selectedHobbies');
+                selectedHobbiesDiv.innerHTML = '';
+
+                for (const hobby of selectedHobbies) {
+                    const hobbySpan = document.createElement('span');
+                    hobbySpan.textContent = hobby + ' ';
+                    selectedHobbiesDiv.appendChild(hobbySpan);
+                }
+            }
+
+            function addDoneHobby() {
+                const customDoneInput = document.getElementById('doneHobbyInput');
+                const customHobby = customDoneInput.value.trim();
+
+                if (customHobby !== '' && !selectedDoneHobbies.includes(customHobby)) {
+                    selectedDoneHobbies.push(customHobby);
+                    customDoneInput.value = '';
+                    updateSelectedDoneHobbies();
+                }
+            }
+
+            function updateSelectedDoneHobbies() {
+                const selectedHobbiesDiv = document.getElementById('selectedDoneHobbies');
+                selectedHobbiesDiv.innerHTML = '';
+
+                for (const hobby of selectedDoneHobbies) {
+                    const hobbySpan = document.createElement('span');
+                    hobbySpan.textContent = hobby + ' ';
+                    selectedHobbiesDiv.appendChild(hobbySpan);
+                }
+            }
+
+        
+               
+            userDescriptionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+
+                const formData = {
+                    fName: document.getElementById("fName").value,
+                    lName: document.getElementById("lName").value,
+                    emailId: document.getElementById("emailId").value,
+                    password: document.getElementById("password").value,
+                    city: document.getElementById("city").value,
+                    aboutMe: document.getElementById("aboutMe").value,
+                    state: document.getElementById("state").value,
+                    zipCode: document.getElementById("zipCode").value,
+                    country: document.getElementById("country").value,
+                    userActivitiesDone: selectedHobbies.join(", "),
+                    userActivitiesLeft: selectedDoneHobbies.join(", ")
+                };
+
+                const headers = new Headers({
+                    'Content-Type': 'application/json',
+                });
+
+                // Send the JSON data in the body of the request
+                fetch('https://aag0621.uta.cloud/seBackend/register.php', {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify(formData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the JSON response from the server
+                    console.log(data);
+
+                    if(data.status == 1){
+                        window.location.href= "login.html";
+                    }
+                    else{
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    // Handle any errors that occur during the fetch request
+                    console.error(error);
+                });
+
+                
+            });
+
+        </script>
+        
+    </body>
+
+
+    </html>

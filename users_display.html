@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="stykes_chat.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.scss">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <title>Wishlist Wanderers</title>
+
+</head>
+<body>
+    <div class="topnav">
+        <h3>Wishlist Wanderers</h3>
+        <button id = "signUpbutton"class = "signup" onclick="toggleSignUp()">R</button>
+        <!-- <button id = "signUpbutton"class = "signup" onclick="toggleSignUp()">SIGN UP</button> -->
+        <button id = "logInbutton"class = "signup" onclick="toggleSignUp()" style="display: none;">LOGIN</button>
+    </div>
+
+    <main style="margin-left: 300px;">
+        <div class="sidenav">
+            <a href="#" onclick="showProf();">My Profile</a>
+            <a href="#" onclick="showUsers();">Find Friends</a>
+            <a href="# " onclick="showChat();">My Chats</a>
+            <a href="#" onclick="showContact();">Contact Us</a>
+        </div>
+        
+        <div class="search-bar" style="margin-top: 70px;" id="search-bar1" >
+            <input type="text" id="search-bar" placeholder="Search Hobbies...">
+            <button id="searchButton">Search</button>
+        </div>
+
+        <div class="user-grid" id="user-grid">
+            <div class="user-block">
+                <div class="user-info">
+                    <img src="images/tony.jpg" alt="${user.fName} ${user.lName}">
+                    <h2>${user.fName} ${user.lName}</h2>
+                </div>
+                <p>Hobbies: ${user.userActivitiesDone}</p>
+                <p>Description: ${user.aboutMe}</p>
+                <button class="chat-button" onclick="startChat(user.fName, user.lName,user.emailId)">Chat</button>
+            </div>
+    
+        </div>
+
+        <div class="containerP" id="containerP" style="display: none;">
+            <div class="pic">
+              <div class="pic-counter-wrapper">
+                <span class="dot" id="active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="arrow-box"><svg class="arrow" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path>
+          </svg></div>
+              <img class="kratos" src="images/tony.jpg">
+            </div>
+            <div class="name-box">
+              <h2>${user.fName} ${user.lName} <span class="age"> 28</span></h2>
+              <p>13 miles away</p>
+              <svg class="dots-up" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path>
+          </svg>
+              <svg class="arrow-up" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z"></path>
+          </svg>
+            </div>
+            <div class="info">
+              <!-- <p>Hello there! I'm an avid traveler with a deep love for discovering new places and cultures. My adventures have taken me to breathtaking landscapes, bustling cities, and hidden gems across the globe. Through my experiences, I aim to inspire others to embark on their own journeys, chase their dreams, and check off items from their travel wishlists. Join me as I share my travel tales, tips, and the incredible beauty of our world.</p>
+             -->
+             <p>${user.aboutMe}</p>
+            </div>
+            </div>
+
+        <div class="chat-container" style="margin-top: 60px;display: none;" id="chat-container">
+            <div class="user-list" id="user-list">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                </div>
+                <ul>
+                    <li class="user">
+                        <div class="user-avatar">
+                            <img src="images/user1.jpg" alt="User 1">
+                        </div>
+                        <div class="user-info" onclick="openChat('Emily Smith')">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                    </li>
+                   
+                </ul>
+            </div>
+            <div class="chat" id="chat">
+                <div class="chat-container1" id="chat-container1" >
+                    <div class="chat-header">
+                        <h1 id="chat-title">Chat with ${user.fName} ${user.lName}</h1>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Type a message...">
+                        <button id="send-button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+        <section class="ftco-section" style="margin-top: 30px; display: none;" id="contact-us">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">Contact Form #01</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="wrapper">
+                            <div class="r   ow no-gutters">
+                                <div class="col-md-7 d-flex align-items-stretch">
+                                    <div class="contact-wrap w-100 p-md-5 p-4">
+                                        <h3 class="mb-4">Get in touch</h3>
+                                        <div id="form-message-warning" class="mb-4"></div> 
+                                  <div id="form-message-success" class="mb-4">
+                                Your message was sent, thank you!
+                                  </div>
+                                        <form method="POST" id="contactForm" name="contactForm">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"> 
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <textarea name="message" class="form-control" id="message" cols="30" rows="7" placeholder="Message"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Send Message" class="btn btn-primary">
+                                                        <div class="submitting"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 d-flex align-items-stretch">
+                                    <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
+                                        <h3 class="mb-4 mt-md-4">Contact us</h3>
+                                <div class="dbox w-100 d-flex align-items-start">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-map-marker"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                    <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                                  </div>
+                              </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-phone"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                    <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                                  </div>
+                              </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-paper-plane"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                    <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                                  </div>
+                              </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-globe"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                    <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                                  </div>
+                              </div>
+                          </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="client.js"></script>
+        
+    </main>
+    <script>
+        // JavaScript for opening the chat interface for a selected user
+
+        function openChat(username) {
+            // Hide the user selection interface
+            const userSelection = document.querySelector('.user');
+            // userSelection.style.display = 'none';
+
+            // Show the chat interface
+            const chatContainer = document.getElementById('chat-container1');
+            chatContainer.style.display = 'block';
+
+            // Set the chat title to the selected username
+            const chatTitle = document.getElementById('chat-title');
+            chatTitle.textContent = 'Chat with ' + username;
+
+            loadChatHistory(username,'X');
+        }
+
+        const chatMessages = document.getElementById('chat-messages');
+        // Function to load chat history for a selected user (dummy data for demonstration)
+        function loadChatHistory(selectedUser,email) {
+            var chatID;
+            var apiURL = 'https://aag0621.uta.cloud/seBackend/getAllChats.php';
+            var loggedInUserId = localStorage.getItem('userId');
+            
+            
+            chatMessages.innerHTML = '';
+
+            fetch(apiURL, {
+                method: 'POST',
+                body: JSON.stringify({ userId: loggedInUserId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(selectedUser);
+                if (data.status === 1) {
+                    const chats = data.chats;
+                    
+                    chats.forEach((msg) => {
+                       
+                        if(msg.otherUserName == selectedUser){
+                            chatID = msg.chatId;
+                            displayChats(chatID,msg.otherUserId);
+                        }
+                    });
+                   
+
+                } else {
+                    console.error('Error fetching chats:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+
+        }
+
+        function displayChats(chatId,recId) {
+ 
+            console.log('receiverId',recId);
+            localStorage.setItem('chatId', chatId);
+            // Fetch messages for the chatId and display in the modal
+            fetch('https://aag0621.uta.cloud/seBackend/receiveMessages.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ chatId: chatId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 1) {
+                    console.log('Hey',data);
+                    displayMessages(data.messages,recId);
+                    // $('#chatModal').modal('show'); // Use jQuery to show the modal
+                } else {
+                    console.error('Error fetching messages:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayMessages(messages,recId) {
+            let chatMessagesContainer = document.getElementById('chat-messages');
+            chatMessagesContainer.innerHTML = ''; // Clear previous messages
+            var loggedInUserId = localStorage.getItem('userId');
+            console.log('In displayMessages',messages);
+            messages.forEach((msg) => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = msg.receiverId === recId ? 'message self' : 'message';
+                messageDiv.innerHTML = `<span class="message-sender">${msg.senderName}</span><span class="message-text">${msg.messageText}</span><span class="message-timestamp">${msg.timestamp}</span>`;
+                chatMessages.appendChild(messageDiv);
+            });
+
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+        
+
+
+    </script>
+
+
+    <div class="footer-dark" id="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Company Name</h3>
+                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    </div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">Company Name © 2018</p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const signupbutton = document.getElementById('signUpbutton');
+        const loginbutton = document.getElementById('logInbutton');
+        const addressForm = document.getElementById('addressForm');
+        const birthdateForm = document.getElementById('birthdateForm');
+        const profilePictureForm = document.getElementById('profilePictureForm');
+        const userDescriptionForm = document.getElementById('userDescriptionForm');
+
+
+
+        function toggleSignUp() {
+        
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                loginbutton.style.display = 'none';
+                signupbutton.style.display = 'block';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                loginbutton.style.display = 'block';
+                signupbutton.style.display = 'none';
+                
+
+            }
+        }
+
+        const selectedHobbies = [];
+
+        function addHobby(hobby) {
+            if (!selectedHobbies.includes(hobby)) {
+                selectedHobbies.push(hobby);
+                updateSelectedHobbies();
+            }
+        }
+
+        function addCustomHobby() {
+            const customHobbyInput = document.getElementById('customHobbyInput');
+            const customHobby = customHobbyInput.value.trim();
+
+            if (customHobby !== '' && !selectedHobbies.includes(customHobby)) {
+                selectedHobbies.push(customHobby);
+                customHobbyInput.value = '';
+                updateSelectedHobbies();
+            }
+        }
+
+        function updateSelectedHobbies() {
+            const selectedHobbiesDiv = document.getElementById('selectedHobbies');
+            selectedHobbiesDiv.innerHTML = '';
+
+            for (const hobby of selectedHobbies) {
+                const hobbySpan = document.createElement('span');
+                hobbySpan.textContent = hobby + ' ';
+                selectedHobbiesDiv.appendChild(hobbySpan);
+            }
+        }
+
+        // Function to adjust sidenav height
+        function adjustSidenavHeight() {
+            const sidenav = document.querySelector('.sidenav');
+            const footer = document.getElementById('footer');
+            const windowHeight = window.innerHeight;
+            const footerTop = footer.getBoundingClientRect().top;
+
+            if (footerTop < windowHeight) {
+                // Footer is in view, adjust sidenav's height
+                sidenav.style.height = (footerTop - 70) + 'px'; // 70 is an offset for topnav
+            } else {
+                // Footer is not in view, set sidenav's height to full window height
+                sidenav.style.height = '100%';
+            }
+        }
+
+        // Initial call to adjust sidenav height
+        adjustSidenavHeight();
+
+        // Add an event listener for scrolling
+        window.addEventListener('scroll', adjustSidenavHeight);
+
+        const contactus = document.getElementById('contact-us');
+        const searchBar = document.getElementById('search-bar');
+        const userGrid = document.getElementById('user-grid');
+        const chatContainer = document.getElementById('chat-container');
+        const myProfile = document.getElementById('containerP');
+        const userList = document.getElementById('user-list');
+        const searchBar1 = document.getElementById('search-bar1');
+        const pcChat = document.getElementById('chat');
+        const chatContainer1 = document.getElementById('chat-container1');
+        
+
+        function showContact(){
+            contactus.style.display = 'block';
+            userGrid.style.display = 'none';
+            searchBar.style.display = 'none';
+            chatContainer.style.display = 'none';
+            myProfile.style.display = 'none';
+        }
+
+        function showChat(){
+            contactus.style.display = 'none';
+            userGrid.style.display = 'none';
+            searchBar.style.display = 'none';
+            chatContainer.style.display = 'flex';
+            myProfile.style.display = 'none';
+
+            fetchChats();
+        }
+
+        function showProf(){
+            contactus.style.display = 'none';
+            userGrid.style.display = 'none';
+            searchBar.style.display = 'none';
+            chatContainer.style.display = 'none';
+            myProfile.style.display = 'block';
+
+            const username = getParameterByName('emailId');
+            const password = getParameterByName('password');
+
+
+            fetch('https://aag0621.uta.cloud/seBackend/getUserInfo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add other headers if needed, like Authorization
+                },
+                body: JSON.stringify({ emailId: username })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 0 ) {
+                    console.log(data);
+                    populateProf(data.user);
+                    
+                } else {
+                    console.error('Error fetching data: ', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            
+        }
+
+        function showUsers(){
+            contactus.style.display = 'none';
+            userGrid.style.display = 'grid';
+            searchBar.style.display = 'block';
+            chatContainer.style.display = 'none';
+            myProfile.style.display = 'none';
+        }
+
+        function startChat(userName,userLName,email){
+            contactus.style.display = 'none';
+            userGrid.style.display = 'none';
+            searchBar.style.display = 'none';
+            chatContainer.style.display = 'flex';
+            myProfile.style.display = 'none';
+            userList.style.display = 'block';  
+            pcChat.style.display = 'block';
+            searchBar1.style.display = 'none';  
+            chatContainer1.style.display = 'block';
+
+            // alert('Hey' + userName);
+            const fullName = userName +' '+ userLName;
+            alert(fullName);
+
+            const chatTitle = document.getElementById('chat-title');
+            chatTitle.textContent = 'Chat with ' + fullName;
+            loadChatHistory(userName,email);
+            fetchChats();
+
+            const sendButton = document.getElementById('send-button');
+            const messageInput = document.getElementById('message-input');
+            var loggedInUserEmail = localStorage.getItem('userEmailId');
+
+            console.log('In SatrtChat',loggedInUserEmail);
+
+            sendButton.addEventListener('click', function () {
+                const messageText = messageInput.value;
+                if (messageText.trim() !== '') {
+                    sendMessageToBackend(loggedInUserEmail, email, messageText);
+                    // loadChatHistory(userName,email);
+                }
+            });
+
+
+        }
+
+        function sendMessageToBackend(senderEmail, receiverEmail, messageText) {
+           console.log('In sendMessage',receiverEmail);
+           var loggedInUserName = localStorage.getItem('userName');
+            fetch('https://aag0621.uta.cloud/seBackend/send.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    senderEmail: senderEmail,
+                    receiverEmail: receiverEmail,
+                    message: messageText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 1) {
+                    // Message sent successfully
+                    console.log('Testing',data);
+                    const now = new Date();
+                    const year = now.getFullYear();
+                    const month = String(now.getMonth() + 1).padStart(2, '0');
+                    const day = String(now.getDate()).padStart(2, '0');
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+                    // Append the new message to the messages container
+                    
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message self' ;
+                    messageDiv.innerHTML = `<span class="message-sender">${loggedInUserName}</span><span class="message-text">${messageText}</span><span class="message-timestamp">${formattedDateTime}</span>`;
+                    // messageDiv.innerHTML = `<span class="message-sender">"Anurag"</span><span class="message-text">"Hi Testing"</span><span class="message-timestamp">"06-06-2023"</span>`;
+                    chatMessages.appendChild(messageDiv);
+                    fetchChats();
+
+                   
+                    // Clear the message input field
+                    document.getElementById('message-input').value = '';
+                } else {
+                    // Handle errors
+                    console.error('Error sending message: ', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            
+        }
+
+        function fetchChats() {
+            var apiURL = 'https://aag0621.uta.cloud/seBackend/getAllChats.php';
+            var loggedInUserId = localStorage.getItem('userId'); // Replace with the actual logged-in user's ID
+
+            fetch(apiURL, {
+                method: 'POST',
+                body: JSON.stringify({ userId: loggedInUserId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 1) {
+                    console.log('her',data);
+                    displayChats_side(data.chats);
+                } else {
+                    console.error('Error fetching chats:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+        }
+
+        function displayChats_side(chats) {
+        var chatsContainer = $('#user-list');
+        chatsContainer.empty(); // Clear existing chats
+
+        chats.forEach(function(chat) {
+            var chatCard = $(`
+              
+                <ul>
+                    <li class="user">
+                        <div class="user-avatar">
+                            <img src="images/user1.jpg" alt="User 1">
+                        </div>
+                        <div class="user-info" onclick="openChat('${chat.otherUserName}')">
+                            <h3>${chat.otherUserName}</h3>
+                            
+                        </div>
+                    </li>
+                   
+                </ul>
+            `);
+            chatsContainer.append(chatCard);
+        });
+    }
+
+        // Function to get URL parameters by name
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        
+
+
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Your code here, this will run once the DOM is ready
+
+      // For example, fetch data asynchronously
+        fetch('https://aag0621.uta.cloud/seBackend/findUser.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add other headers if needed, like Authorization
+            },
+            body: JSON.stringify({ userActivitiesDone: '' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 0 && data.users) {
+                populateUserGrid(data.users);
+            } else {
+                console.error('Error fetching data: ', data.message);
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
+
+    // Function to call the API and populate the user grid
+    document.getElementById('searchButton').addEventListener('click', function() {
+        var searchQuery = document.getElementById('search-bar').value;
+        // console.log(searchQuery);
+        
+        fetch('https://aag0621.uta.cloud/seBackend/findUser.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add other headers if needed, like Authorization
+            },
+            body: JSON.stringify({ userActivitiesDone: searchQuery })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 0 && data.users) {
+                populateUserGrid(data.users);
+            } else {
+                console.error('Error fetching data: ', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    function populateProf(user){
+        const profContainer = document.getElementById('containerP');
+        profContainer.innerHTML = ''; // Clear the grid first
+
+        // users.forEach(user => {
+            const picBox = document.createElement('div');
+            picBox.className = 'pic';
+            
+            picBox.innerHTML = `
+                <div class="pic">
+                <div class="pic-counter-wrapper">
+                    <span class="dot" id="active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="arrow-box"><svg class="arrow" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path>
+                </svg></div>
+                <img class="kratos" src="images/tony.jpg">
+                </div>
+            `;
+            const nameBox = document.createElement('div');
+            nameBox.className = 'name-box';
+
+            nameBox.innerHTML = `
+                <h2>${user.fName} ${user.lName} <span class="age"> 28</span></h2>
+                <p>13 miles away</p>
+                <svg class="dots-up" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"></path>
+                </svg>
+                <svg class="arrow-up" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z"></path>
+                </svg>
+            `;
+
+            const userInfo = document.createElement('div');
+            userInfo.className = 'info';
+            userInfo.innerHTML = `
+                <p>${user.aboutMe}</p>
+            `; // Use the actual image source if you have one
+
+            
+
+            // console.log('hello',user.fName ,user.lName);
+            picBox.appendChild(nameBox);
+            picBox.appendChild(userInfo);
+            // nameBox.appendChild(userActivitiesDone);
+            // nameBox.appendChild(userAboutMe);
+            // nameBox.appendChild(chatButton); // Append the chat button to the user block
+
+            profContainer.appendChild(picBox);
+        // });
+
+    }
+    function populateUserGrid(users) {
+        const userGrid = document.getElementById('user-grid');
+        userGrid.innerHTML = ''; // Clear the grid first
+
+        users.forEach(user => {
+            const userBlock = document.createElement('div');
+            userBlock.className = 'user-block';
+
+            const userInfo = document.createElement('div');
+            userInfo.className = 'user-info';
+            userInfo.innerHTML = `
+                <img src="images/tony.jpg" alt="${user.fName} ${user.lName}">
+                <h2>${user.fName} ${user.lName}</h2>
+            `; // Use the actual image source if you have one
+
+            const userActivitiesDone = document.createElement('p');
+            userActivitiesDone.textContent = `Hobbies: ${user.userActivitiesDone}`;
+
+            const userAboutMe = document.createElement('p');
+            userAboutMe.textContent = `Description: ${user.aboutMe}`;
+
+            const chatButton = document.createElement('button');
+                chatButton.className = 'chat-button';
+                chatButton.textContent = 'Chat';
+            
+            chatButton.onclick = function () {
+                startChat(user.fName,user.lName,user.emailId);
+            };
+
+            // console.log('hello',user.fName ,user.lName);
+    
+            userBlock.appendChild(userInfo);
+            userBlock.appendChild(userActivitiesDone);
+            userBlock.appendChild(userAboutMe);
+            userBlock.appendChild(chatButton); // Append the chat button to the user block
+
+            userGrid.appendChild(userBlock);
+        });
+    }
+
+   
+    
+    </script>
+</body>
+
+
+</html>

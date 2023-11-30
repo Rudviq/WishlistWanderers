@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration Form</title>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <form id="registrationForm">
+        <label for="fName">First Name:</label>
+        <input type="text" id="fName" name="fName" required><br>
+
+        <label for="lName">Last Name:</label>
+        <input type="text" id="lName" name="lName" required><br>
+
+        <label for="emailId">Email:</label>
+        <input type="email" id="emailId" name="emailId" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br>
+
+        <label for="aboutMe">About Me:</label>
+        <textarea id="aboutMe" name="aboutMe" required></textarea><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br>
+
+        <label for="zipCode">ZIP Code:</label>
+        <input type="text" id="zipCode" name="zipCode" required><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="registrationResult"></div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = {
+                fName: document.getElementById("fName").value,
+                lName: document.getElementById("lName").value,
+                emailId: document.getElementById("emailId").value,
+                password: document.getElementById("password").value,
+                city: document.getElementById("city").value,
+                aboutMe: document.getElementById("aboutMe").value,
+                state: document.getElementById("state").value,
+                zipCode: document.getElementById("zipCode").value,
+                country: document.getElementById("country").value
+            };
+
+            // Send a POST request to your API
+            fetch("https://aag0621.uta.cloud/seBackend/register.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const registrationResult = document.getElementById("registrationResult");
+                    if (data.status === 1) {
+                        registrationResult.innerHTML = "User registered successfully. ";
+                    } else if (data.status === 3) {
+                        registrationResult.innerHTML = "User already exists.";
+                    } else {
+                        registrationResult.innerHTML = "User registration failed. Please check the form data.";
+                    }
+                })
+                .catch(error => {
+                    console.error("An error occurred:", error);
+                });
+        });
+    </script>
+</body>
+</html>

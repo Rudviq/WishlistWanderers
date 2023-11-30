@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <title>Wishlist Wanderers</title>
+</head>
+<body>
+    <div class="topnav">
+        <h3>Wishlist Wanderers</h3>
+        <button id="signUpButton" class="signup" onclick="toggleSignUp()">SIGN UP</button>
+        <button id="logInButton" class="signup" onclick="toggleSignUp()" style="display: none;">LOGIN</button>
+    </div>
+
+    <main>
+        <form id="loginForm" style="display: block;" onsubmit="loginUser(); return false;">
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id="username" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+                <button type="submit" class="lbutton">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+
+        <form id="signupForm" style="display: none;" onsubmit="signUpUser(); return false;">
+            <div class="container">
+                <label for="usign"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="usign" id="usign" required>
+                <label for="psign"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psign" id="psign" required>
+                <label for="csign"><b>Confirm Password</b></label>
+                <input type="password" placeholder="Enter Confirm Password" name="cpsw" id="csign" required>
+                <button type="submit" class="lbutton">Sign Up</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+
+        <form id="addressForm" style="display: none;" onsubmit="addressUser(); return false;">
+            <label for="street"><b>Street Address:</b></label>
+            <input type="text" id="street" name="street" required><br><br>
+            <label for="city"><b>City:</b></label>
+            <input type="text" id="city" name="city" required><br><br>
+            <label for="state"><b>State:</b></label>
+            <input type="text" id="state" name="state" required><br><br>
+            <label for="zip"><b>ZIP Code:</b></label>
+            <input type="text" id="zip" name="zip" required pattern="[0-9]{5}"><br><br>
+            <input type="submit" value="Submit" class="lbutton">
+        </form>
+
+        <form id="birthdateForm" style="display: none;">
+            <h2 style="margin-top: 20px;"><b>Enter Birth Date -></b></h2>
+            <div class="input-container">
+                <label for="birthDay"><b>Day:</b></label>
+                <input type="number" id="birthDay" name="birthDay" min="1" max="31" required>
+                <label for="birthMonth"><b>Month:</b></label>
+                <input type="number" id="birthMonth" name="birthMonth" min="1" max="12" required>
+                <label for="birthYear"><b>Year:</b></label>
+                <input type="number" id="birthYear" name="birthYear" required>
+            </div>
+            <br><br>
+            <button type="submit" class="lbutton" onclick="birthUser()">Submit</button>
+        </form>
+
+        <form id="profilePictureForm" style="display: none;">
+            <label for="profilePictureButton" class="image-container">
+                <img src="images/placeholder.png" alt="Profile Picture" class="profile-image">
+                <input type="file" id="profilePictureButton" name="profilePicture" accept="image/*" required>
+            </label>
+            <button id="profile" class="lbutton" onclick="profileUser()">SUBMIT</button>
+        </form>
+    </main>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const signUpButton = document.getElementById('signUpButton');
+        const logInButton = document.getElementById('logInButton');
+        const addressForm = document.getElementById('addressForm');
+        const birthdateForm = document.getElementById('birthdateForm');
+        const profilePictureForm = document.getElementById('profilePictureForm');
+        const userDescriptionForm = document.getElementById('userDescriptionForm');
+
+        const users = [
+            {
+                username: "user1",
+                password: "password1",
+                firstName: "John",
+                lastName: "Doe",
+                email: "john@example.com",
+                profilePicture: "user1.jpg"
+            },
+            // Add more user objects here
+        ];
+
+        function loginUser() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                const existingUser = users.find((user) => user.username === username);
+
+                if (existingUser) {
+                    if (existingUser.password !== password) {
+                        alert('Incorrect password. Please try again.');
+                    } else {
+                        alert(`Welcome, ${existingUser.firstName} ${existingUser.lastName}!`);
+                    }
+                } else if (!existingUser) {
+                    alert('User not found. Please check your username.');
+                    toggleSignUp();
+                }
+            } else {
+                alert('Please enter both username and password.');
+            }
+        }
+
+        function toggleSignUp() {
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                logInButton.style.display = 'none';
+                signUpButton.style.display = 'block';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                logInButton.style.display = 'block';
+                signUpButton.style.display = 'none';
+            }
+        }
+
+        function signUpUser() {
+            const username = document.getElementById('usign').value;
+            const password = document.getElementById('psign').value;
+            const confirmPassword = document.getElementById('csign').value;
+
+            if (username && password && confirmPassword && password === confirmPassword) {
+                const newUser = {
+                    username: username,
+                    password: password,
+                };
+                users.push(newUser);
+
+                if (addressForm.style.display === 'none') {
+                    addressForm.style.display = 'block';
+                    signupForm.style.display = 'none';
+                }
+            } else {
+                alert('Please enter a valid username and matching passwords.');
+            }
+        }
+
+        function addressUser() {
+            const street = document.getElementById('street').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+
+            if (street && city && state && zip) {
+                const username = document.getElementById('usign').value;
+                const userToUpdate = users.find((user) => user.username === username);
+
+                if (userToUpdate) {
+                    userToUpdate.address = {
+                        street: street,
+                        city: city,
+                        state: state,
+                        zip: zip
+                    };
+                }
+
+                if (profilePictureForm.style.display === 'none') {
+                    profilePictureForm.style.display = 'block';
+                    addressForm.style.display = 'none';
+                }
+            } else {
+                alert('Please fill out all address fields.');
+            }
+        }
+
+        function profileUser() {
+            profilePictureForm.style.display = 'none';
+            addressForm.style.display = 'block';
+        }
+
+        
+    </script>
+
+    <!-- Your footer and JavaScript includes go here -->
+
+</body>
+</html>

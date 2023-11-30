@@ -1,0 +1,387 @@
+body{
+    /* background-color: #1c1c1c; */
+    margin: 0;
+    /* display: flex; */
+    justify-content: center;
+    background-color: #F4F4F4  ;
+}   
+
+.topnav{
+    display: flex;
+    border-bottom: rgb(255, 255, 255) 0.001px solid;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    background-color: #2F2FA2;
+    opacity: 0.9;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position:fixed;
+}
+
+.topnav h3{
+    color:#ffffff;
+    font-size:Xx-large;
+    margin: 0;
+    padding: 17px;
+    padding-left: 30px;
+}
+
+.signup {
+    color: #FFFFFF;
+    background-color: #FC4672;
+    box-shadow: none;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 16px; /* Add some spacing between the "Log In" button and the right corner */
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack the form elements vertically */
+    padding-top: 100px;
+    padding-bottom: 50px;
+    
+}
+
+
+/* Bordered form */
+form {
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #f1f1f1;
+    border-radius: 15PX;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40PX;
+    padding-bottom: 40px;
+    background-color: #d7d7d7;
+}
+  
+  /* Full-width inputs */
+    input[type=text], input[type=password],input[type=number] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      margin-bottom: 0px;
+    }
+
+  form label{
+    margin-top: 20px;
+  }
+  
+  /* Set a style for all buttons */
+  .lbuton {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 1;
+  }
+  
+  /* Extra style for the cancel button (red) */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Add padding to containers */
+  .container {
+    padding: 16px;
+  }
+  
+  /* The "Forgot password" text */
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  .input-container {
+      display: flex;
+  }
+
+  .input-container label,
+  .input-container input {
+      margin-right: 10px;
+      /* border: 1px solid #ccc;
+      height: 30px; */
+  }
+
+  /* Style for the circular image container */
+  .image-container {
+    /* width: 150px;
+    height: 150px; */
+    
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Style for the circular image */
+.profile-image {
+    border-radius: 150px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Style for the file input button */
+#profilePictureButton {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+textarea{
+  height: 200px;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  background-color: #e0e0e0;
+}
+
+.hobby{
+  background-color: #2F2FA2;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+}
+
+
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  opacity: 0.5;
+  top: 70px;
+  left: 0;
+  background-color: #242582;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  margin-left: 200px;
+  padding-left: 20px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  flex-grow: 1;
+}
+
+.search-bar {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input[type="text"] {
+  /* width: 80%; */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #FC4672;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Create a responsive grid with a minimum column width of 250px */
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.user-block {
+  background-color: #F4F4F4;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  height: 100%; /* Set a fixed height for all user blocks */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space evenly within the block */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  max-width: 50px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.footer-dark {
+  padding:50px 0;
+  color:#f0f9ff;
+  background-color:#282d32;
+}
+
+.footer-dark h3 {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.footer-dark ul {
+  padding:0;
+  list-style:none;
+  line-height:1.6;
+  font-size:14px;
+  margin-bottom:0;
+}
+
+.footer-dark ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.6;
+}
+
+.footer-dark ul a:hover {
+  opacity:0.8;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item:not(.social) {
+    text-align:center;
+    padding-bottom:20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom:36px;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item.text {
+    margin-bottom:0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity:0.6;
+  margin-bottom:0;
+}
+
+.footer-dark .item.social {
+  text-align:center;
+}
+
+@media (max-width:991px) {
+  .footer-dark .item.social {
+    text-align:center;
+    margin-top:20px;
+  }
+}
+
+.footer-dark .item.social > a {
+  font-size:20px;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  margin:0 8px;
+  color:#fff;
+  opacity:0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity:0.9;
+}
+
+.footer-dark .copyright {
+  text-align:center;
+  padding-top:24px;
+  opacity:0.3;
+  font-size:13px;
+  margin-bottom:0;
+}
+
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+
+  .input-grou {
+    display: flex;
+    position:static;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Optional spacing between First Name and Last Name */
+}
+
+.input-grou input {
+    width: 48%; /* Adjust the width as needed */
+    margin-right: 2%; /* Optional spacing between inputs */
+}
